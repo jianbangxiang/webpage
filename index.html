@@ -1,0 +1,1196 @@
+<html lang="zh-CN"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能信息处理课题组 - 大学计算机学院</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&amp;family=Noto+Serif+SC:wght@400;600;700&amp;display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#36CFC9',
+                        accent: '#722ED1',
+                        dark: '#1D2129',
+                        light: '#F2F3F5',
+                        'neutral-light': '#C9CDD4',
+                        'neutral-medium': '#86909C',
+                        'neutral-dark': '#4E5969'
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans SC', 'sans-serif'],
+                        serif: ['Noto Serif SC', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+            .nav-shadow {
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            }
+            .section-divider {
+                height: 3px;
+                width: 60px;
+                background-color: theme('colors.primary');
+                margin: 1rem 0 2rem 0;
+            }
+            .publication-item {
+                transition: all 0.2s ease;
+            }
+            .publication-item:hover {
+                background-color: rgba(22, 93, 255, 0.03);
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-white text-dark">
+    <!-- 导航栏 -->
+    <header id="navbar" class="fixed w-full bg-white/95 backdrop-blur-sm z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <!-- 课题组Logo和名称 -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-primary rounded-md flex items-center justify-center">
+                        <i class="fa fa-flask text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-lg md:text-xl font-bold text-primary">付承羿智能信息处理课题组</h1>
+                        <p class="text-xs text-neutral-medium hidden sm:block">University of Science and Technology</p>
+                    </div>
+                </div>
+                
+                <!-- 桌面端导航 -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-dark hover:text-primary transition-colors font-medium">首页</a>
+                    <a href="#about" class="text-dark hover:text-primary transition-colors font-medium">关于我们</a>
+                    <a href="#research" class="text-dark hover:text-primary transition-colors font-medium">研究方向</a>
+                    <a href="#members" class="text-dark hover:text-primary transition-colors font-medium">成员介绍</a>
+                    <a href="#publications" class="text-dark hover:text-primary transition-colors font-medium">学术成果</a>
+                    <a href="#news" class="text-dark hover:text-primary transition-colors font-medium">新闻动态</a>
+                    <a href="#contact" class="text-dark hover:text-primary transition-colors font-medium">联系方式</a>
+                </nav>
+                
+                <!-- 移动端菜单按钮 -->
+                <button id="menu-toggle" class="md:hidden text-dark focus:outline-none">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 移动端导航菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+                <a href="#home" class="text-dark hover:text-primary transition-colors py-2 border-b border-light">首页</a>
+                <a href="#about" class="text-dark hover:text-primary transition-colors py-2 border-b border-light">关于我们</a>
+                <a href="#research" class="text-dark hover:text-primary transition-colors py-2 border-b border-light">研究方向</a>
+                <a href="#members" class="text-dark hover:text-primary transition-colors py-2 border-b border-light">成员介绍</a>
+                <a href="#publications" class="text-dark hover:text-primary transition-colors py-2 border-b border-light">学术成果</a>
+                <a href="#news" class="text-dark hover:text-primary transition-colors py-2 border-b border-light">新闻动态</a>
+                <a href="#contact" class="text-dark hover:text-primary transition-colors py-2">联系方式</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section id="home" class="pt-28 pb-20 md:pt-40 md:pb-32 bg-gradient-to-br from-light to-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 md:pr-12 mb-10 md:mb-0">
+                    <h2 class="text-[clamp(1.8rem,4vw,3rem)] font-bold leading-tight text-dark mb-4">
+                        探索智能信息处理的<br>
+                        <span class="text-primary">前沿技术与应用</span>
+                    </h2>
+                    <p class="text-neutral-dark text-lg mb-8 leading-relaxed">
+                        我们专注于人工智能、机器学习与数据挖掘领域的基础研究与应用开发，
+                        致力于解决复杂的信息处理问题，推动智能技术的创新与发展。
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#research" class="px-6 py-3 bg-primary text-white font-medium rounded-md hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
+                            研究方向
+                        </a>
+                        <a href="#contact" class="px-6 py-3 bg-white text-primary border border-primary font-medium rounded-md hover:bg-primary/5 transition-colors">
+                            加入我们
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="https://picsum.photos/id/180/800/600" alt="智能信息处理实验室场景" class="w-full h-auto rounded-xl shadow-2xl">
+                </div>
+            </div>
+            
+            <!-- 统计数据 -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20">
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center card-hover">
+                    <div class="text-4xl font-bold text-primary mb-2">50+</div>
+                    <div class="text-neutral-dark">学术论文</div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center card-hover">
+                    <div class="text-4xl font-bold text-primary mb-2">15+</div>
+                    <div class="text-neutral-dark">科研项目</div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center card-hover">
+                    <div class="text-4xl font-bold text-primary mb-2">20+</div>
+                    <div class="text-neutral-dark">团队成员</div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center card-hover">
+                    <div class="text-4xl font-bold text-primary mb-2">8+</div>
+                    <div class="text-neutral-dark">专利成果</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark">关于我们</h2>
+                <div class="section-divider mx-auto"></div>
+                <p class="text-neutral-dark text-lg">
+                    智能信息处理课题组成立于2010年，隶属于大学计算机科学与技术学院，
+                    是一个充满活力和创新精神的研究团队。
+                </p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row gap-12 items-center">
+                <div class="lg:w-1/2">
+                    <img src="https://picsum.photos/id/20/800/600" alt="课题组研究场景" class="w-full h-auto rounded-xl shadow-xl">
+                </div>
+                <div class="lg:w-1/2">
+                    <h3 class="text-2xl font-bold mb-4 text-dark">课题组简介</h3>
+                    <p class="text-neutral-dark mb-4 leading-relaxed">
+                        智能信息处理课题组专注于人工智能、机器学习、数据挖掘、自然语言处理等前沿领域的研究。
+                        团队由著名学者张明教授带领，现有教授2名，副教授3名，讲师2名，博士和硕士研究生20余名。
+                    </p>
+                    <p class="text-neutral-dark mb-4 leading-relaxed">
+                        课题组先后承担国家自然科学基金项目、省部级科研项目以及企业合作项目20余项，
+                        在国内外重要学术期刊和会议上发表论文50余篇，申请和授权发明专利10余项。
+                    </p>
+                    <p class="text-neutral-dark mb-6 leading-relaxed">
+                        我们注重理论研究与实际应用相结合，与多家知名企业建立了长期合作关系，
+                        研究成果已在智能医疗、智能教育、智慧城市等领域得到应用。
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="flex items-center">
+                            <i class="fa fa-check-circle text-primary text-xl mr-3"></i>
+                            <span>国家自然科学基金</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fa fa-check-circle text-primary text-xl mr-3"></i>
+                            <span>省部级重点项目</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fa fa-check-circle text-primary text-xl mr-3"></i>
+                            <span>国际期刊论文</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fa fa-check-circle text-primary text-xl mr-3"></i>
+                            <span>专利技术转化</span>
+                        </div>
+                    </div>
+                    
+                    <a href="#contact" class="inline-flex items-center text-primary font-medium hover:text-primary/80 transition-colors">
+                        了解更多 <i class="fa fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 研究方向 -->
+    <section id="research" class="py-20 bg-light">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark">研究方向</h2>
+                <div class="section-divider mx-auto"></div>
+                <p class="text-neutral-dark text-lg">
+                    我们的研究覆盖人工智能多个前沿领域，注重理论创新与实际应用相结合
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 研究方向1 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://picsum.photos/id/160/600/400" alt="机器学习与深度学习" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fa fa-brain text-primary text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-dark">机器学习与深度学习</h3>
+                        <p class="text-neutral-dark mb-4">
+                            研究先进的机器学习算法和深度学习模型，包括神经网络架构设计、优化算法、强化学习等，
+                            应用于图像识别、语音处理等领域。
+                        </p>
+                        <a href="#" class="text-primary font-medium hover:text-primary/80 transition-colors inline-flex items-center">
+                            查看详情 <i class="fa fa-angle-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 研究方向2 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://picsum.photos/id/119/600/400" alt="自然语言处理" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fa fa-comment text-primary text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-dark">自然语言处理</h3>
+                        <p class="text-neutral-dark mb-4">
+                            研究文本分析、情感计算、机器翻译、问答系统等自然语言处理技术，
+                            开发能够理解和生成人类语言的智能系统。
+                        </p>
+                        <a href="#" class="text-primary font-medium hover:text-primary/80 transition-colors inline-flex items-center">
+                            查看详情 <i class="fa fa-angle-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 研究方向3 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://picsum.photos/id/180/600/400" alt="数据挖掘与知识发现" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fa fa-database text-primary text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-dark">数据挖掘与知识发现</h3>
+                        <p class="text-neutral-dark mb-4">
+                            研究从大规模数据中提取有价值信息和知识的理论与方法，
+                            包括关联规则挖掘、聚类分析、异常检测等技术。
+                        </p>
+                        <a href="#" class="text-primary font-medium hover:text-primary/80 transition-colors inline-flex items-center">
+                            查看详情 <i class="fa fa-angle-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 研究方向4 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://picsum.photos/id/111/600/400" alt="计算机视觉" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fa fa-eye text-primary text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-dark">计算机视觉</h3>
+                        <p class="text-neutral-dark mb-4">
+                            研究图像与视频的分析、理解和生成技术，包括目标检测与跟踪、图像分割、
+                            人脸识别、场景理解等方向。
+                        </p>
+                        <a href="#" class="text-primary font-medium hover:text-primary/80 transition-colors inline-flex items-center">
+                            查看详情 <i class="fa fa-angle-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 研究方向5 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://picsum.photos/id/239/600/400" alt="智能系统与应用" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fa fa-cogs text-primary text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-dark">智能系统与应用</h3>
+                        <p class="text-neutral-dark mb-4">
+                            基于上述理论研究，开发面向实际应用的智能系统，
+                            包括智能医疗诊断、智能教育辅助、智慧城市管理等解决方案。
+                        </p>
+                        <a href="#" class="text-primary font-medium hover:text-primary/80 transition-colors inline-flex items-center">
+                            查看详情 <i class="fa fa-angle-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 研究方向6 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://picsum.photos/id/2/600/400" alt="可信人工智能" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fa fa-shield text-primary text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-dark">可信人工智能</h3>
+                        <p class="text-neutral-dark mb-4">
+                            研究人工智能的可解释性、公平性、安全性和隐私保护技术，
+                            确保AI系统的可靠部署和负责任使用。
+                        </p>
+                        <a href="#" class="text-primary font-medium hover:text-primary/80 transition-colors inline-flex items-center">
+                            查看详情 <i class="fa fa-angle-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 研究数据可视化 -->
+            <div class="mt-20 bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-2xl font-bold mb-6 text-center">研究领域分布</h3>
+                <div class="h-80">
+                    <canvas id="researchDistributionChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 成员介绍 -->
+    <section id="members" class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark">团队成员</h2>
+                <div class="section-divider mx-auto"></div>
+                <p class="text-neutral-dark text-lg">
+                    我们拥有一支由教授、副教授、讲师和研究生组成的多元化研究团队
+                </p>
+            </div>
+            
+            <!--  faculty 成员 -->
+            <h3 class="text-xl font-bold mb-6 text-dark"> faculty 成员</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <!-- 教授1 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-light">
+                    <div class="p-6 text-center">
+                        <div class="w-40 h-40 mx-auto mb-4 rounded-full overflow-hidden border-4 border-white shadow-lg">
+                            <img src="https://picsum.photos/id/1005/200/200" alt="张明 教授" class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="text-xl font-bold mb-1 text-dark">张明</h4>
+                        <p class="text-primary mb-2">教授 / 博士生导师</p>
+                        <p class="text-neutral-dark text-sm mb-4">
+                            研究方向：机器学习、数据挖掘
+                        </p>
+                        <div class="flex justify-center space-x-3 mb-4">
+                            <a href="#" class="text-neutral-medium hover:text-primary transition-colors">
+                                <i class="fa fa-envelope"></i>
+                            </a>
+                            <a href="#" class="text-neutral-medium hover:text-primary transition-colors">
+                                <i class="fa fa-globe"></i>
+                            </a>
+                            <a href="#" class="text-neutral-medium hover:text-primary transition-colors">
+                                <i class="fa fa-google"></i>
+                            </a>
+                        </div>
+                        <a href="#" class="text-sm text-primary hover:text-primary/80 transition-colors">
+                            个人主页 <i class="fa fa-angle-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 教授2 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-light">
+                    <div class="p-6 text-center">
+                        <div class="w-40 h-40 mx-auto mb-4 rounded-full overflow-hidden border-4 border-white shadow-lg">
+                            <img src="https://picsum.photos/id/1011/200/200" alt="李华 教授" class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="text-xl font-bold mb-1 text-dark">李华</h4>
+                        <p class="text-primary mb-2">教授 / 博士生导师</p>
+                        <p class="text-neutral-dark text-sm mb-4">
+                            研究方向：自然语言处理、人工智能应用
+                        </p>
+                        <div class="flex justify-center space-x-3 mb-4">
+                            <a href="#" class="text-neutral-medium hover:text-primary transition-colors">
+                                <i class="fa fa-envelope"></i>
+                            </a>
+                            <a href="#" class="text-neutral-medium hover:text-primary transition-colors">
+                                <i class="fa fa-globe"></i>
+                            </a>
+                            <a href="#" class="text-neutral-medium hover:text-primary transition-colors">
+                                <i class="fa fa-google"></i>
+                            </a>
+                        </div>
+                        <a href="#" class="text-sm text-primary hover:text-primary/80 transition-colors">
+                            个人主页 <i class="fa fa-angle-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 副教授1 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-light">
+                    <div class="p-6 text-center">
+                        <div class="w-40 h-40 mx-auto mb-4 rounded-full overflow-hidden border-4 border-white shadow-lg">
+                            <img src="https://picsum.photos/id/1012/200/200" alt="王芳 副教授" class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="text-xl font-bold mb-1 text-dark">王芳</h4>
+                        <p class="text-primary mb-2">副教授 / 硕士生导师</p>
+                        <p class="text-neutral-dark text-sm mb-4">
+                            研究方向：计算机视觉、模式识别
+                        </p>
+                        <div class="flex justify-center space-x-3 mb-4">
+                            <a href="#" class="text-neutral-medium hover:text-primary transition-colors">
+                                <i class="fa fa-envelope"></i>
+                            </a>
+                            <a href="#" class="text-neutral-medium hover:text-primary transition-colors">
+                                <i class="fa fa-globe"></i>
+                            </a>
+                            <a href="#" class="text-neutral-medium hover:text-primary transition-colors">
+                                <i class="fa fa-google"></i>
+                            </a>
+                        </div>
+                        <a href="#" class="text-sm text-primary hover:text-primary/80 transition-colors">
+                            个人主页 <i class="fa fa-angle-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 博士研究生 -->
+            <h3 class="text-xl font-bold mb-6 text-dark">博士研究生</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 mb-16">
+                <!-- 博士1 -->
+                <div class="text-center card-hover p-4 rounded-lg">
+                    <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-2 border-white shadow">
+                        <img src="https://picsum.photos/id/1025/100/100" alt="刘阳" class="w-full h-full object-cover">
+                    </div>
+                    <h5 class="font-medium text-dark">刘阳</h5>
+                    <p class="text-xs text-neutral-medium">机器学习</p>
+                </div>
+                
+                <!-- 博士2 -->
+                <div class="text-center card-hover p-4 rounded-lg">
+                    <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-2 border-white shadow">
+                        <img src="https://picsum.photos/id/1074/100/100" alt="陈明" class="w-full h-full object-cover">
+                    </div>
+                    <h5 class="font-medium text-dark">陈明</h5>
+                    <p class="text-xs text-neutral-medium">自然语言处理</p>
+                </div>
+                
+                <!-- 博士3 -->
+                <div class="text-center card-hover p-4 rounded-lg">
+                    <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-2 border-white shadow">
+                        <img src="https://picsum.photos/id/1062/100/100" alt="赵静" class="w-full h-full object-cover">
+                    </div>
+                    <h5 class="font-medium text-dark">赵静</h5>
+                    <p class="text-xs text-neutral-medium">计算机视觉</p>
+                </div>
+                
+                <!-- 博士4 -->
+                <div class="text-center card-hover p-4 rounded-lg">
+                    <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-2 border-white shadow">
+                        <img src="https://picsum.photos/id/1066/100/100" alt="孙伟" class="w-full h-full object-cover">
+                    </div>
+                    <h5 class="font-medium text-dark">孙伟</h5>
+                    <p class="text-xs text-neutral-medium">数据挖掘</p>
+                </div>
+            </div>
+            
+            <!-- 硕士研究生 -->
+            <h3 class="text-xl font-bold mb-6 text-dark">硕士研究生</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                <!-- 硕士1 -->
+                <div class="text-center card-hover p-4 rounded-lg">
+                    <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-2 border-white shadow">
+                        <img src="https://picsum.photos/id/1083/100/100" alt="周琳" class="w-full h-full object-cover">
+                    </div>
+                    <h5 class="font-medium text-dark">周琳</h5>
+                    <p class="text-xs text-neutral-medium">深度学习</p>
+                </div>
+                
+                <!-- 硕士2 -->
+                <div class="text-center card-hover p-4 rounded-lg">
+                    <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-2 border-white shadow">
+                        <img src="https://picsum.photos/id/1084/100/100" alt="吴强" class="w-full h-full object-cover">
+                    </div>
+                    <h5 class="font-medium text-dark">吴强</h5>
+                    <p class="text-xs text-neutral-medium">计算机视觉</p>
+                </div>
+                
+                <!-- 硕士3 -->
+                <div class="text-center card-hover p-4 rounded-lg">
+                    <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-2 border-white shadow">
+                        <img src="https://picsum.photos/id/1085/100/100" alt="郑晓" class="w-full h-full object-cover">
+                    </div>
+                    <h5 class="font-medium text-dark">郑晓</h5>
+                    <p class="text-xs text-neutral-medium">NLP</p>
+                </div>
+                
+                <!-- 硕士4 -->
+                <div class="text-center card-hover p-4 rounded-lg">
+                    <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-2 border-white shadow">
+                        <img src="https://picsum.photos/id/1086/100/100" alt="王浩" class="w-full h-full object-cover">
+                    </div>
+                    <h5 class="font-medium text-dark">王浩</h5>
+                    <p class="text-xs text-neutral-medium">智能系统</p>
+                </div>
+                
+                <!-- 硕士5 -->
+                <div class="text-center card-hover p-4 rounded-lg">
+                    <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-2 border-white shadow">
+                        <img src="https://picsum.photos/id/1087/100/100" alt="林小" class="w-full h-full object-cover">
+                    </div>
+                    <h5 class="font-medium text-dark">林小</h5>
+                    <p class="text-xs text-neutral-medium">数据挖掘</p>
+                </div>
+                
+                <!-- 硕士6 -->
+                <div class="text-center card-hover p-4 rounded-lg">
+                    <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-2 border-white shadow">
+                        <img src="https://picsum.photos/id/1088/100/100" alt="黄亮" class="w-full h-full object-cover">
+                    </div>
+                    <h5 class="font-medium text-dark">黄亮</h5>
+                    <p class="text-xs text-neutral-medium">可信AI</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 学术成果 -->
+    <section id="publications" class="py-20 bg-light">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark">学术成果</h2>
+                <div class="section-divider mx-auto"></div>
+                <p class="text-neutral-dark text-lg">
+                    我们在国际顶级期刊和会议上发表了多篇学术论文，主持和参与多项国家级科研项目
+                </p>
+            </div>
+            
+            <!-- 论文分类标签 -->
+            <div class="flex flex-wrap justify-center gap-3 mb-10">
+                <button class="px-5 py-2 bg-primary text-white rounded-full text-sm font-medium">全部论文</button>
+                <button class="px-5 py-2 bg-white text-dark rounded-full text-sm font-medium hover:bg-primary/5 transition-colors">期刊论文</button>
+                <button class="px-5 py-2 bg-white text-dark rounded-full text-sm font-medium hover:bg-primary/5 transition-colors">会议论文</button>
+                <button class="px-5 py-2 bg-white text-dark rounded-full text-sm font-medium hover:bg-primary/5 transition-colors">专利成果</button>
+                <button class="px-5 py-2 bg-white text-dark rounded-full text-sm font-medium hover:bg-primary/5 transition-colors">研究项目</button>
+            </div>
+            
+            <!-- 精选论文 -->
+            <div class="mb-16">
+                <h3 class="text-xl font-bold mb-6 text-dark">精选论文</h3>
+                <div class="space-y-6">
+                    <!-- 论文1 -->
+                    <div class="publication-item bg-white p-6 rounded-xl shadow-md">
+                        <div class="flex flex-col md:flex-row md:items-start gap-6">
+                            <div class="md:w-1/5">
+                                <img src="https://picsum.photos/id/1/300/200" alt="论文缩略图" class="w-full h-auto rounded-lg">
+                            </div>
+                            <div class="md:w-4/5">
+                                <h4 class="text-lg font-bold mb-2 text-dark">
+                                    <a href="#" class="hover:text-primary transition-colors">Deep Learning for Natural Language Understanding: A Survey</a>
+                                </h4>
+                                <p class="text-neutral-dark mb-2">
+                                    张明, 李华, 王芳, <span class="text-primary">等</span>
+                                </p>
+                                <p class="text-neutral-medium mb-3 text-sm">
+                                    <span class="font-medium">期刊:</span> IEEE Transactions on Pattern Analysis and Machine Intelligence, 2024
+                                </p>
+                                <p class="text-neutral-dark text-sm mb-4 line-clamp-2">
+                                    本文对自然语言理解领域的深度学习方法进行了全面综述，分析了当前主流模型的优缺点，并探讨了未来研究方向。
+                                </p>
+                                <div class="flex flex-wrap gap-3">
+                                    <a href="#" class="text-primary text-sm hover:text-primary/80 transition-colors flex items-center">
+                                        <i class="fa fa-file-pdf-o mr-1"></i> PDF
+                                    </a>
+                                    <a href="#" class="text-primary text-sm hover:text-primary/80 transition-colors flex items-center">
+                                        <i class="fa fa-code mr-1"></i> 代码
+                                    </a>
+                                    <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">
+                                        自然语言处理
+                                    </span>
+                                    <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">
+                                        深度学习
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 论文2 -->
+                    <div class="publication-item bg-white p-6 rounded-xl shadow-md">
+                        <div class="flex flex-col md:flex-row md:items-start gap-6">
+                            <div class="md:w-1/5">
+                                <img src="https://picsum.photos/id/2/300/200" alt="论文缩略图" class="w-full h-auto rounded-lg">
+                            </div>
+                            <div class="md:w-4/5">
+                                <h4 class="text-lg font-bold mb-2 text-dark">
+                                    <a href="#" class="hover:text-primary transition-colors">A Novel Framework for Explainable AI in Medical Diagnosis</a>
+                                </h4>
+                                <p class="text-neutral-dark mb-2">
+                                    王芳, 刘阳, 张明, <span class="text-primary">等</span>
+                                </p>
+                                <p class="text-neutral-medium mb-3 text-sm">
+                                    <span class="font-medium">会议:</span> Proceedings of the AAAI Conference on Artificial Intelligence, 2023
+                                </p>
+                                <p class="text-neutral-dark text-sm mb-4 line-clamp-2">
+                                    本文提出了一种新的可解释人工智能框架，应用于医疗诊断领域，在保持高精度的同时提供直观的决策解释。
+                                </p>
+                                <div class="flex flex-wrap gap-3">
+                                    <a href="#" class="text-primary text-sm hover:text-primary/80 transition-colors flex items-center">
+                                        <i class="fa fa-file-pdf-o mr-1"></i> PDF
+                                    </a>
+                                    <a href="#" class="text-primary text-sm hover:text-primary/80 transition-colors flex items-center">
+                                        <i class="fa fa-code mr-1"></i> 代码
+                                    </a>
+                                    <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">
+                                        可解释AI
+                                    </span>
+                                    <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">
+                                        医疗应用
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 论文3 -->
+                    <div class="publication-item bg-white p-6 rounded-xl shadow-md">
+                        <div class="flex flex-col md:flex-row md:items-start gap-6">
+                            <div class="md:w-1/5">
+                                <img src="https://picsum.photos/id/3/300/200" alt="论文缩略图" class="w-full h-auto rounded-lg">
+                            </div>
+                            <div class="md:w-4/5">
+                                <h4 class="text-lg font-bold mb-2 text-dark">
+                                    <a href="#" class="hover:text-primary transition-colors">Efficient Clustering Algorithms for Large-scale Data Mining</a>
+                                </h4>
+                                <p class="text-neutral-dark mb-2">
+                                    李华, 陈明, 赵静, 张明
+                                </p>
+                                <p class="text-neutral-medium mb-3 text-sm">
+                                    <span class="font-medium">期刊:</span> ACM Transactions on Knowledge Discovery from Data, 2023
+                                </p>
+                                <p class="text-neutral-dark text-sm mb-4 line-clamp-2">
+                                    本文提出了两种高效的聚类算法，能够处理大规模数据集，在保持聚类质量的同时显著提高计算效率。
+                                </p>
+                                <div class="flex flex-wrap gap-3">
+                                    <a href="#" class="text-primary text-sm hover:text-primary/80 transition-colors flex items-center">
+                                        <i class="fa fa-file-pdf-o mr-1"></i> PDF
+                                    </a>
+                                    <a href="#" class="text-primary text-sm hover:text-primary/80 transition-colors flex items-center">
+                                        <i class="fa fa-code mr-1"></i> 代码
+                                    </a>
+                                    <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">
+                                        数据挖掘
+                                    </span>
+                                    <span class="bg-primary/10 text-primary text-xs px-3 py-1 rounded-full">
+                                        聚类算法
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-10">
+                    <a href="#" class="inline-flex items-center px-6 py-3 bg-white text-primary border border-primary font-medium rounded-md hover:bg-primary/5 transition-colors">
+                        查看更多论文 <i class="fa fa-angle-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- 科研项目 -->
+            <div>
+                <h3 class="text-xl font-bold mb-6 text-dark">科研项目</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- 项目1 -->
+                    <div class="bg-white p-6 rounded-xl shadow-md card-hover">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fa fa-flask text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold mb-2 text-dark">基于深度学习的自然语言理解与生成研究</h4>
+                                <p class="text-neutral-medium mb-1 text-sm">
+                                    <span class="font-medium">项目类别:</span> 国家自然科学基金重点项目
+                                </p>
+                                <p class="text-neutral-medium mb-1 text-sm">
+                                    <span class="font-medium">负责人:</span> 张明 教授
+                                </p>
+                                <p class="text-neutral-medium mb-3 text-sm">
+                                    <span class="font-medium">时间:</span> 2022-2026
+                                </p>
+                                <p class="text-neutral-dark text-sm line-clamp-2">
+                                    本项目旨在研究新一代自然语言理解与生成模型，解决现有模型在语义理解、上下文建模等方面的局限性。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 项目2 -->
+                    <div class="bg-white p-6 rounded-xl shadow-md card-hover">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fa fa-flask text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold mb-2 text-dark">面向智慧医疗的可解释人工智能关键技术研究</h4>
+                                <p class="text-neutral-medium mb-1 text-sm">
+                                    <span class="font-medium">项目类别:</span> 省部级重点研发计划
+                                </p>
+                                <p class="text-neutral-medium mb-1 text-sm">
+                                    <span class="font-medium">负责人:</span> 王芳 副教授
+                                </p>
+                                <p class="text-neutral-medium mb-3 text-sm">
+                                    <span class="font-medium">时间:</span> 2023-2025
+                                </p>
+                                <p class="text-neutral-dark text-sm line-clamp-2">
+                                    本项目针对医疗数据特点，研究可解释、高可靠的人工智能算法，开发面向疾病诊断和预后预测的智能系统。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 项目3 -->
+                    <div class="bg-white p-6 rounded-xl shadow-md card-hover">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fa fa-flask text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold mb-2 text-dark">大规模数据的高效挖掘与知识发现方法研究</h4>
+                                <p class="text-neutral-medium mb-1 text-sm">
+                                    <span class="font-medium">项目类别:</span> 国家自然科学基金面上项目
+                                </p>
+                                <p class="text-neutral-medium mb-1 text-sm">
+                                    <span class="font-medium">负责人:</span> 李华 教授
+                                </p>
+                                <p class="text-neutral-medium mb-3 text-sm">
+                                    <span class="font-medium">时间:</span> 2021-2024
+                                </p>
+                                <p class="text-neutral-dark text-sm line-clamp-2">
+                                    本项目研究适用于大规模、高维度、异构数据的挖掘算法，开发高效的知识发现平台，服务于智慧城市建设。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 项目4 -->
+                    <div class="bg-white p-6 rounded-xl shadow-md card-hover">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fa fa-flask text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold mb-2 text-dark">基于计算机视觉的智能监控与异常检测系统</h4>
+                                <p class="text-neutral-medium mb-1 text-sm">
+                                    <span class="font-medium">项目类别:</span> 企业横向合作项目
+                                </p>
+                                <p class="text-neutral-medium mb-1 text-sm">
+                                    <span class="font-medium">负责人:</span> 赵静 博士
+                                </p>
+                                <p class="text-neutral-medium mb-3 text-sm">
+                                    <span class="font-medium">时间:</span> 2023-2024
+                                </p>
+                                <p class="text-neutral-dark text-sm line-clamp-2">
+                                    本项目与某科技公司合作，研发基于计算机视觉的智能监控系统，实现实时异常行为检测与预警。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 新闻动态 -->
+    <section id="news" class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark">新闻动态</h2>
+                <div class="section-divider mx-auto"></div>
+                <p class="text-neutral-dark text-lg">
+                    了解课题组的最新研究进展、学术活动和重要通知
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 新闻1 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-light">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://picsum.photos/id/201/600/400" alt="学术会议照片" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-neutral-medium text-sm mb-3">
+                            <i class="fa fa-calendar-o mr-2"></i>
+                            <span>2024年5月15日</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-dark">
+                            课题组在AAAI 2024发表两篇论文
+                        </h3>
+                        <p class="text-neutral-dark mb-4 line-clamp-3">
+                            我课题组在第38届AAAI人工智能大会上发表两篇论文，分别介绍了我们在可解释AI和自然语言处理领域的最新研究成果。
+                        </p>
+                        <a href="#" class="text-primary font-medium hover:text-primary/80 transition-colors inline-flex items-center">
+                            阅读详情 <i class="fa fa-angle-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 新闻2 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-light">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://picsum.photos/id/202/600/400" alt="项目启动会照片" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-neutral-medium text-sm mb-3">
+                            <i class="fa fa-calendar-o mr-2"></i>
+                            <span>2024年4月28日</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-dark">
+                            国家自然科学基金重点项目启动会顺利召开
+                        </h3>
+                        <p class="text-neutral-dark mb-4 line-clamp-3">
+                            由张明教授主持的国家自然科学基金重点项目"基于深度学习的自然语言理解与生成研究"启动会在我校顺利召开，多位领域专家出席会议并指导。
+                        </p>
+                        <a href="#" class="text-primary font-medium hover:text-primary/80 transition-colors inline-flex items-center">
+                            阅读详情 <i class="fa fa-angle-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 新闻3 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-light">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://picsum.photos/id/203/600/400" alt="学术讲座照片" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-neutral-medium text-sm mb-3">
+                            <i class="fa fa-calendar-o mr-2"></i>
+                            <span>2024年3月12日</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-dark">
+                            邀请斯坦福大学李教授来访并做学术报告
+                        </h3>
+                        <p class="text-neutral-dark mb-4 line-clamp-3">
+                            我们有幸邀请到斯坦福大学计算机科学系李教授来访，并做了题为"人工智能的未来发展与挑战"的学术报告，现场反响热烈。
+                        </p>
+                        <a href="#" class="text-primary font-medium hover:text-primary/80 transition-colors inline-flex items-center">
+                            阅读详情 <i class="fa fa-angle-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-flex items-center px-6 py-3 bg-white text-primary border border-primary font-medium rounded-md hover:bg-primary/5 transition-colors">
+                    查看更多新闻 <i class="fa fa-angle-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section id="contact" class="py-20 bg-light">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark">联系方式</h2>
+                <div class="section-divider mx-auto"></div>
+                <p class="text-neutral-dark text-lg">
+                    欢迎与我们联系，探讨合作研究、学术交流或加入我们的团队
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- 联系表单 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-bold mb-6 text-dark">发送消息</h3>
+                    <form>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="contact-name" class="block text-neutral-dark mb-2">姓名</label>
+                                <input type="text" id="contact-name" class="w-full px-4 py-3 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors">
+                            </div>
+                            <div>
+                                <label for="contact-email" class="block text-neutral-dark mb-2">邮箱</label>
+                                <input type="email" id="contact-email" class="w-full px-4 py-3 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors">
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label for="contact-subject" class="block text-neutral-dark mb-2">主题</label>
+                            <input type="text" id="contact-subject" class="w-full px-4 py-3 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors">
+                        </div>
+                        <div class="mb-6">
+                            <label for="contact-message" class="block text-neutral-dark mb-2">消息内容</label>
+                            <textarea id="contact-message" rows="5" class="w-full px-4 py-3 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
+                            发送消息
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- 联系信息 -->
+                <div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg mb-8">
+                        <h3 class="text-xl font-bold mb-6 text-dark">联系信息</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <i class="fa fa-map-marker text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-dark mb-1">地址</h4>
+                                    <p class="text-neutral-dark">
+                                        北京市海淀区大学路100号<br>
+                                        计算机科学与技术学院 3号楼501室
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <i class="fa fa-phone text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-dark mb-1">电话</h4>
+                                    <p class="text-neutral-dark">
+                                        +86-10-12345678<br>
+                                        +86-10-87654321
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <i class="fa fa-envelope text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-dark mb-1">邮箱</h4>
+                                    <p class="text-neutral-dark">
+                                        contact@iip-lab.com<br>
+                                        zhangming@university.edu.cn
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 加入我们 -->
+                    <div class="bg-primary/5 p-8 rounded-xl border border-primary/20">
+                        <h3 class="text-xl font-bold mb-4 text-dark">加入我们</h3>
+                        <p class="text-neutral-dark mb-6">
+                            我们常年招收计算机科学、人工智能、数据科学等相关专业的博士、硕士研究生，
+                            同时欢迎访问学者和博士后加入我们的团队。
+                        </p>
+                        <a href="#" class="inline-flex items-center px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
+                            申请加入 <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-10 h-10 bg-white rounded-md flex items-center justify-center">
+                            <i class="fa fa-flask text-primary text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white">智能信息处理课题组</h3>
+                            <p class="text-xs text-neutral-light">University of Science and Technology</p>
+                        </div>
+                    </div>
+                    <p class="text-neutral-light mb-6">
+                        专注于人工智能、机器学习与数据挖掘领域的基础研究与应用开发，
+                        致力于推动智能技术的创新与发展。
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-neutral-light hover:text-white transition-colors">
+                            <i class="fa fa-weixin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-neutral-light hover:text-white transition-colors">
+                            <i class="fa fa-weibo text-xl"></i>
+                        </a>
+                        <a href="#" class="text-neutral-light hover:text-white transition-colors">
+                            <i class="fa fa-github text-xl"></i>
+                        </a>
+                        <a href="#" class="text-neutral-light hover:text-white transition-colors">
+                            <i class="fa fa-google text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6 text-white">快速链接</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-neutral-light hover:text-white transition-colors">首页</a></li>
+                        <li><a href="#about" class="text-neutral-light hover:text-white transition-colors">关于我们</a></li>
+                        <li><a href="#research" class="text-neutral-light hover:text-white transition-colors">研究方向</a></li>
+                        <li><a href="#members" class="text-neutral-light hover:text-white transition-colors">成员介绍</a></li>
+                        <li><a href="#publications" class="text-neutral-light hover:text-white transition-colors">学术成果</a></li>
+                        <li><a href="#news" class="text-neutral-light hover:text-white transition-colors">新闻动态</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6 text-white">资源链接</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-neutral-light hover:text-white transition-colors">研究数据</a></li>
+                        <li><a href="#" class="text-neutral-light hover:text-white transition-colors">开源代码</a></li>
+                        <li><a href="#" class="text-neutral-light hover:text-white transition-colors">学术讲座</a></li>
+                        <li><a href="#" class="text-neutral-light hover:text-white transition-colors">招生信息</a></li>
+                        <li><a href="#" class="text-neutral-light hover:text-white transition-colors">合作单位</a></li>
+                        <li><a href="#" class="text-neutral-light hover:text-white transition-colors">实验室规章制度</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6 text-white">订阅通知</h4>
+                    <p class="text-neutral-light mb-4">
+                        订阅我们的新闻通讯，及时了解课题组的最新动态
+                    </p>
+                    <form class="flex mb-4">
+                        <input type="email" placeholder="您的邮箱地址" class="flex-1 px-4 py-3 bg-dark border border-neutral-dark rounded-l-lg focus:outline-none focus:border-primary transition-colors text-white">
+                        <button type="submit" class="bg-primary text-white px-4 rounded-r-lg hover:bg-primary/90 transition-colors">
+                            <i class="fa fa-paper-plane"></i>
+                        </button>
+                    </form>
+                    <p class="text-neutral-light text-sm">
+                        我们尊重您的隐私，不会向第三方分享您的信息
+                    </p>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-neutral-dark text-center text-neutral-light text-sm">
+                <p>© 2024 智能信息处理课题组 版权所有 | 大学计算机科学与技术学院</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 bg-primary text-white rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300 z-50">
+        <i class="fa fa-angle-up text-xl"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // 移动端菜单切换
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuToggle.innerHTML = mobileMenu.classList.contains('hidden') 
+                ? '<i class="fa fa-bars text-xl"></i>' 
+                : '<i class="fa fa-times text-xl"></i>';
+        });
+        
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        const backToTop = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            // 导航栏效果
+            if (window.scrollY > 100) {
+                navbar.classList.add('nav-shadow');
+                navbar.classList.remove('py-4');
+                navbar.classList.add('py-2');
+            } else {
+                navbar.classList.remove('nav-shadow');
+                navbar.classList.add('py-4');
+                navbar.classList.remove('py-2');
+            }
+            
+            // 返回顶部按钮
+            if (window.scrollY > 500) {
+                backToTop.classList.remove('opacity-0', 'invisible');
+                backToTop.classList.add('opacity-100', 'visible');
+            } else {
+                backToTop.classList.add('opacity-0', 'invisible');
+                backToTop.classList.remove('opacity-100', 'visible');
+            }
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // 关闭移动菜单
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        menuToggle.innerHTML = '<i class="fa fa-bars text-xl"></i>';
+                    }
+                }
+            });
+        });
+        
+        // 返回顶部
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 研究领域分布图表
+        const ctx = document.getElementById('researchDistributionChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['机器学习', '自然语言处理', '计算机视觉', '数据挖掘', '智能系统', '可信AI'],
+                datasets: [{
+                    data: [25, 20, 20, 15, 10, 10],
+                    backgroundColor: [
+                        '#165DFF',
+                        '#36CFC9',
+                        '#722ED1',
+                        '#FF7D00',
+                        '#F53F3F',
+                        '#0FC6C2'
+                    ],
+                    borderWidth: 0,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            font: {
+                                family: 'Noto Sans SC',
+                                size: 12
+                            },
+                            padding: 20
+                        }
+                    }
+                },
+                cutout: '60%'
+            }
+        });
+    </script>
+
+
+</body></html>
